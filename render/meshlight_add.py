@@ -70,7 +70,8 @@ class AMTH_OBJECT_OT_meshlight_add(bpy.types.Operator):
                 number += 1
 
         meshlight_name = 'light_meshlight_%.2d' % number
-        
+ 
+        # Add the Grid 
         bpy.ops.mesh.primitive_grid_add(
             x_subdivisions=4, y_subdivisions=4,
             rotation=self.rotation, radius=self.size, enter_editmode=True)
