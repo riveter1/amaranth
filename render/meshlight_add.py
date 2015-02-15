@@ -43,7 +43,7 @@ class AMTH_OBJECT_OT_meshlight_add(bpy.types.Operator):
     strength = bpy.props.FloatProperty(
         name="Strength",
         min=0.01, max=100000.0,
-        default=1.5,
+        default=1.0,
         step=0.25,
         )
 
@@ -70,14 +70,13 @@ class AMTH_OBJECT_OT_meshlight_add(bpy.types.Operator):
                 number += 1
 
         meshlight_name = 'light_meshlight_%.2d' % number
-
+        
         bpy.ops.mesh.primitive_grid_add(
             x_subdivisions=4, y_subdivisions=4,
-            rotation=self.rotation, radius=self.size)
+            rotation=self.rotation, radius=self.size, enter_editmode=True)
             
         bpy.ops.transform.rotate(value=-pi, axis=(True, False, False))
-        bpy.ops.transform.translate(value=(0.0, 0.0, 5.0), constraint_axis=(False, False, True))
-
+        bpy.ops.object.editmode_toggle()
         bpy.context.object.name = meshlight_name
         meshlight = scene.objects[meshlight_name]
         meshlight.show_wire = True
